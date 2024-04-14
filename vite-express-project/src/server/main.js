@@ -8,6 +8,10 @@ import multer from "multer";
 import fs from "fs";
 
 const app = express();
+if (process.env.NODE_ENV === "production") {
+  ViteExpress.config({ mode: "production" });
+}
+
 app.use(express.text());
 // app.use(bodyParser.raw({ type: "image/jpeg" }));
 const upload = multer({ dest: "uploads/" });
