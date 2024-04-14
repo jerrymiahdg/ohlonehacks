@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Header from "./Header";
+import Spinner from "./Spinner";
+import Markdown from "react-markdown";
 
 function App() {
   const [val, setVal] = useState("");
@@ -35,8 +37,10 @@ function App() {
         return e.json();
       })
       .then((text) => {
+        setLoading(false);
         setDiagnosis(text.condition);
         setInfo(text.description);
+        console.log(text.description);
       });
   };
 
@@ -46,44 +50,65 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-gradient-to-b from-blue-1 to-blue-2 flex flex-col items-center">
+    <div className="w-screen h-screen bg-gradient-to-b from-blue-1 to-blue-2 flex flex-col p-5 items-center">
       <Header />
       <form
-        className="w-3/5 flex-grow mt-10 flex flex-col gap-5"
+        className="max-w-2xl w-full flex-grow mt-10 flex flex-col gap-5"
         onSubmit={clickHandler}
       >
-        {image ? (
+        {diagnosis || loading ? (
           <>
-            <img
-              src={image}
-              alt="hehe"
-              className="rounded-3xl object-cover aspect-square w-full"
-            />
+            <div className="btn aspect-square rounded-3xl flex flex-col justify-center items-center text-center p-5 gap-5">
+              {loading ? (
+                <Spinner />
+              ) : (
+                <>
+                  <h1 className="text-2xl">
+                    You may have <span className="font-bold">{diagnosis}</span>
+                  </h1>
+                  <Markdown>{info}</Markdown>
+                </>
+              )}
+            </div>
+            <button className="btn rounded-full p-5" type="button">
+              Back
+            </button>
           </>
         ) : (
           <>
-            <label
-              for="photo"
-              className="btn text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek"
-            >
-              Add Photo
-            </label>
-            <input
-              className="hidden"
-              id="photo"
-              type="file"
-              name="image"
-              placeholder="input"
-              onChange={changeHandler}
-            />
+            {image && (
+              <>
+                <img
+                  src={image}
+                  alt="hehe"
+                  className="rounded-3xl object-cover aspect-square w-full"
+                />
+              </>
+            )}
+            <>
+              <label
+                for="photo"
+                className={`${
+                  image && "hidden"
+                } btn text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek`}
+              >
+                Add Photo
+              </label>
+              <input
+                className="hidden"
+                id="photo"
+                type="file"
+                name="image"
+                placeholder="input"
+                onChange={changeHandler}
+              />
+            </>
+            <button className="btn rounded-full p-5" type="submit">
+              Process Photo
+            </button>
           </>
         )}
-        <button className="btn rounded-full p-5" type="submit">
-          Process Photo
-        </button>
       </form>
-      {diagnosis && <div>You have: {diagnosis}</div>}
-      {info && <div>{info}</div>}
     </div>
   );
 }
