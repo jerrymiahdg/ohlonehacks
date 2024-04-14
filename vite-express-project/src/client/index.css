@@ -39,6 +39,6 @@ body {
 }
 
 .dissolveImageAnimation {
-  animation: dissolveImage ease 3s;
+  animation: dissolveImage ease 2s;
   animation-fill-mode: forwards;
 }

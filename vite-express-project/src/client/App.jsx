@@ -92,7 +92,7 @@ function App() {
               className={`${
                 loading &&
                 "cursor-not-allowed disabled:opacity-50 hover:bg-opacity-5"
-              } btn rounded-full transition-all p-5 hover:bg-opacity-10`}
+              } btn z-50 rounded-full transition-all p-5 hover:bg-opacity-10`}
               type="button"
               onClick={backHandler}
               disabled={loading}
@@ -136,8 +136,12 @@ function App() {
               />
             </>
             <button
-              className="btn rounded-full p-5 hover:bg-opacity-10 transition-all"
+              className={`${
+                !image &&
+                "cursor-not-allowed disabled:opacity-50 hover:bg-opacity-5"
+              } btn rounded-full p-5 hover:bg-opacity-10 transition-all`}
               type="submit"
+              disabled={!image}
             >
               Process Photo
             </button>
