@@ -66,7 +66,7 @@ function App() {
       >
         {diagnosis || loading ? (
           <>
-            <div className="aspect-square rounded-3xl flex flex-col justify-center items-center text-center p-5 gap-5">
+            <div className="btn aspect-square rounded-3xl flex flex-col justify-center items-center text-center p-5 gap-5">
               {loading ? (
                 <Spinner />
               ) : (
@@ -74,7 +74,7 @@ function App() {
                   <h1 className="text-2xl z-50">
                     You may have <span className="font-bold">{diagnosis}</span>
                   </h1>
-                  <Markdown className="z-50">{info}</Markdown>
+                  <Markdown className="z-50 text-xs">{info}</Markdown>
                 </>
               )}
               <div className="absolute flex justify-center items-center w-full aspect-square p-5">
@@ -95,6 +95,7 @@ function App() {
               type="button"
               onClick={backHandler}
               disabled={loading}
+              data-twe-ripple-init
             >
               Back
             </button>
@@ -103,11 +104,17 @@ function App() {
           <>
             {image && (
               <>
-                <img
-                  src={image}
-                  alt="hehe"
-                  className="rounded-3xl object-cover aspect-square w-full"
-                />
+                <div className="btn transition-all hover:bg-opacity-10 text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek cursor-pointer">
+                  <div className="absolute flex justify-center items-center w-full aspect-square p-5">
+                    <div className="max-w-2xl w-full">
+                      <img
+                        src={image}
+                        alt="hehe"
+                        className="rounded-3xl object-cover aspect-square w-full"
+                      />
+                    </div>
+                  </div>
+                </div>
               </>
             )}
             <>
