@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #fffcc0;
+}
+
+body {
+  background-image: linear-gradient(to bottom right, #7fb8aa, #254a65);
+}
+
+@layer components {
+  .btn {
+    @apply justify-center flex items-center bg-white bg-opacity-5 hover:bg-opacity-15 transition-all;
+  }
+}
+
+.idek {
+  background-image: url("./assets/sorry.jpg");
+}
