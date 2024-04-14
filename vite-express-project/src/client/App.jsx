@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./Header";
 import Spinner from "./Spinner";
 import Markdown from "react-markdown";
+// import { TERipple } from "tw-elements-react";
 
 function App() {
   const [val, setVal] = useState("");
@@ -67,26 +68,28 @@ function App() {
         {diagnosis || loading ? (
           <>
             <div className="btn aspect-square rounded-3xl flex flex-col justify-center items-center text-center p-5 gap-5">
-              {loading ? (
-                <Spinner />
-              ) : (
-                <>
-                  <h1 className="text-2xl z-50">
-                    You may have <span className="font-bold">{diagnosis}</span>
-                  </h1>
-                  <Markdown className="z-50 text-xs">{info}</Markdown>
-                </>
-              )}
+              {loading && <Spinner />}
+              <div
+                className={`flex flex-col gap-5 duration-500 transition-all ${
+                  loading ? "opacity-0 h-0" : "opacity-100"
+                }`}
+              >
+                <h1 className="transition-opacity text-2xl z-50">
+                  You may have <span className="font-bold">{diagnosis}</span>
+                </h1>
+                <Markdown className="z-50 text-xs">{info}</Markdown>
+              </div>
               <div className="absolute flex justify-center items-center w-full aspect-square p-5">
                 <div className="max-w-2xl w-full">
                   <img
                     src={image}
                     alt="hehe"
-                    className="opacity-25 blur-[5px] brightness-50 rounded-3xl object-cover aspect-square w-full"
+                    className="dissolveImageAnimation rounded-3xl object-cover aspect-square w-full"
                   />
                 </div>
               </div>
             </div>
+            {/* <Ripple> */}
             <button
               className={`${
                 loading &&
@@ -95,28 +98,32 @@ function App() {
               type="button"
               onClick={backHandler}
               disabled={loading}
-              data-twe-ripple-init
             >
               Back
             </button>
+            {/* </Ripple> */}
           </>
         ) : (
           <>
-            {image && (
-              <>
-                <div className="btn transition-all hover:bg-opacity-10 text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek cursor-pointer">
-                  <div className="absolute flex justify-center items-center w-full aspect-square p-5">
-                    <div className="max-w-2xl w-full">
-                      <img
-                        src={image}
-                        alt="hehe"
-                        className="rounded-3xl object-cover aspect-square w-full"
-                      />
-                    </div>
+            {/* {image && ( */}
+            <>
+              <div
+                className={`${
+                  image ? "opacity-100" : "opacity-0 h-0"
+                } btn duration-500 transition-all hover:bg-opacity-10 text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek cursor-pointer`}
+              >
+                <div className="absolute flex justify-center items-center w-full aspect-square p-5">
+                  <div className="max-w-2xl w-full">
+                    <img
+                      src={image}
+                      alt="hehe"
+                      className={`rounded-3xl object-cover aspect-square w-full`}
+                    />
                   </div>
                 </div>
-              </>
-            )}
+              </div>
+            </>
+            {/* )} */}
             <>
               <label
                 for="photo"
