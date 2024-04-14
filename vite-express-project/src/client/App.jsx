@@ -2,7 +2,6 @@ import { useState } from "react";
 import Header from "./Header";
 import Spinner from "./Spinner";
 import Markdown from "react-markdown";
-// import { TERipple } from "tw-elements-react";
 
 function App() {
   const [val, setVal] = useState("");
@@ -89,7 +88,6 @@ function App() {
                 </div>
               </div>
             </div>
-            {/* <Ripple> */}
             <button
               className={`${
                 loading &&
@@ -101,7 +99,6 @@ function App() {
             >
               Back
             </button>
-            {/* </Ripple> */}
           </>
         ) : (
           <>
@@ -110,17 +107,13 @@ function App() {
               <div
                 className={`${
                   image ? "opacity-100" : "opacity-0 h-0"
-                } btn duration-500 transition-all hover:bg-opacity-10 text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek cursor-pointer`}
+                } btn overflow-hidden duration-500 transition-all hover:bg-opacity-10 text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek cursor-pointer`}
               >
-                <div className="absolute flex justify-center items-center w-full aspect-square p-5">
-                  <div className="max-w-2xl w-full">
-                    <img
-                      src={image}
-                      alt="hehe"
-                      className={`rounded-3xl object-cover aspect-square w-full`}
-                    />
-                  </div>
-                </div>
+                <img
+                  src={image}
+                  alt="hehe"
+                  className={`rounded-3xl object-cover aspect-square w-full`}
+                />
               </div>
             </>
             {/* )} */}
