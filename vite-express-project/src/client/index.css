@@ -10,12 +10,14 @@
 }
 
 body {
-  background-image: linear-gradient(to bottom right, #7fb8aa, #254a65);
+  background-color: #254a65;
+
+  /* background-image: linear-gradient(to bottom right, #7fb8aa, #254a65); */
 }
 
 @layer components {
   .btn {
-    @apply justify-center flex items-center bg-white bg-opacity-5 hover:bg-opacity-15 transition-all;
+    @apply justify-center flex items-center bg-white bg-opacity-5 transition-all;
   }
 }
 

@@ -16,6 +16,14 @@ function App() {
     postImage(e, val);
   };
 
+  const backHandler = () => {
+    setDiagnosis("");
+    setVal("");
+    setInfo("");
+    setLoading(false);
+    setImage("");
+  };
+
   const postImage = (e, val) => {
     console.log(URL.createObjectURL(val));
     console.log(val);
@@ -50,7 +58,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-gradient-to-b from-blue-1 to-blue-2 flex flex-col p-5 items-center">
+    <div className="bg-gradient-to-b from-[#7fb8aa] to-[#254a65] w-screen py-20 flex flex-col p-5 items-center">
       <Header />
       <form
         className="max-w-2xl w-full flex-grow mt-10 flex flex-col gap-5"
@@ -58,19 +66,36 @@ function App() {
       >
         {diagnosis || loading ? (
           <>
-            <div className="btn aspect-square rounded-3xl flex flex-col justify-center items-center text-center p-5 gap-5">
+            <div className="aspect-square rounded-3xl flex flex-col justify-center items-center text-center p-5 gap-5">
               {loading ? (
                 <Spinner />
               ) : (
                 <>
-                  <h1 className="text-2xl">
+                  <h1 className="text-2xl z-50">
                     You may have <span className="font-bold">{diagnosis}</span>
                   </h1>
-                  <Markdown>{info}</Markdown>
+                  <Markdown className="z-50">{info}</Markdown>
                 </>
               )}
+              <div className="absolute flex justify-center items-center w-full aspect-square p-5">
+                <div className="max-w-2xl w-full">
+                  <img
+                    src={image}
+                    alt="hehe"
+                    className="opacity-25 blur-[5px] brightness-50 rounded-3xl object-cover aspect-square w-full"
+                  />
+                </div>
+              </div>
             </div>
-            <button className="btn rounded-full p-5" type="button">
+            <button
+              className={`${
+                loading &&
+                "cursor-not-allowed disabled:opacity-50 hover:bg-opacity-5"
+              } btn rounded-full transition-all p-5 hover:bg-opacity-10`}
+              type="button"
+              onClick={backHandler}
+              disabled={loading}
+            >
               Back
             </button>
           </>
@@ -90,7 +115,7 @@ function App() {
                 for="photo"
                 className={`${
                   image && "hidden"
-                } btn text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek`}
+                } btn transition-all hover:bg-opacity-10 text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek cursor-pointer`}
               >
                 Add Photo
               </label>
@@ -103,7 +128,10 @@ function App() {
                 onChange={changeHandler}
               />
             </>
-            <button className="btn rounded-full p-5" type="submit">
+            <button
+              className="btn rounded-full p-5 hover:bg-opacity-10 transition-all"
+              type="submit"
+            >
               Process Photo
             </button>
           </>
