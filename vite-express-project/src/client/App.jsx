@@ -6,6 +6,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [diagnosis, setDiagnosis] = useState("");
   const [info, setInfo] = useState("");
+  const [image, setImage] = useState("");
 
   const clickHandler = (e) => {
     e.preventDefault();
@@ -39,6 +40,11 @@ function App() {
       });
   };
 
+  const changeHandler = (e) => {
+    setVal(e.target.files[0]);
+    setImage(URL.createObjectURL(e.target.files[0]));
+  };
+
   return (
     <div className="w-screen h-screen bg-gradient-to-b from-blue-1 to-blue-2 flex flex-col items-center">
       <Header />
@@ -46,25 +52,36 @@ function App() {
         className="w-3/5 flex-grow mt-10 flex flex-col gap-5"
         onSubmit={clickHandler}
       >
-        <label
-          for="photo"
-          className="btn text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek"
-        >
-          Add Photo
-        </label>
-        <input
-          className="hidden"
-          id="photo"
-          type="file"
-          name="image"
-          placeholder="input"
-          onChange={(e) => setVal(e.target.files[0])}
-        />
+        {image ? (
+          <>
+            <img
+              src={image}
+              alt="hehe"
+              className="rounded-3xl object-cover aspect-square w-full"
+            />
+          </>
+        ) : (
+          <>
+            <label
+              for="photo"
+              className="btn text-2xl font-bold aspect-square rounded-3xl flex justify-center items-center idek"
+            >
+              Add Photo
+            </label>
+            <input
+              className="hidden"
+              id="photo"
+              type="file"
+              name="image"
+              placeholder="input"
+              onChange={changeHandler}
+            />
+          </>
+        )}
         <button className="btn rounded-full p-5" type="submit">
           Process Photo
         </button>
       </form>
-      <img src="./assets/sorry.jpg" alt="" width={500} />
       {diagnosis && <div>You have: {diagnosis}</div>}
       {info && <div>{info}</div>}
     </div>
